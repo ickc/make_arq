@@ -20,11 +20,11 @@ jobs:
           - '1.10'
         include:
           - python-version: '2.7'
-            numpy-version: '1'
+            numpy-version: '1.12'
           - python-version: '3.5'
-            numpy-version: '1'
+            numpy-version: '1.16'
           - python-version: '3.6'
-            numpy-version: '1'
+            numpy-version: '1.17'
 
     steps:
     - uses: actions/checkout@v2
