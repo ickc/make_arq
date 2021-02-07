@@ -11,15 +11,28 @@ jobs:
       matrix:
         # see setup.py for supported versions
         python-version:
-          - 3.6
-          - 3.7
-          - 3.8
-          - 3.9
-          - pypy3
+          - '2.7'
+          - '3.3'
+          - '3.4'
+          - '3.5'
+          - '3.6'
+          - '3.7'
+          - '3.8'
+          - '3.9'
         numpy-version:
           - '1.20'
           - '1.19'
-          # - 1.18
+          - '1.18'
+          - '1.17'
+          - '1.16'
+          - '1.15'
+          - '1.14'
+          - '1.13'
+          - '1.12'
+          - '1.11'
+        exclude:
+          - python-version: '3.6'
+          - numpy-version: '1.20'
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
