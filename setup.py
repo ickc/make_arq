@@ -6,6 +6,6 @@ setup(
     version="0.1",
     description="make_arq helper",
     ext_modules=[
-        Extension("_makearq", ["_makearq.c"], include_dirs=[numpy.get_include()])
+        Extension("_makearq", ["src/make_arq/_makearq.c"], include_dirs=[numpy.get_include()])
     ],
 )
