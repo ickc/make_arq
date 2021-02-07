@@ -16,30 +16,30 @@
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *   
  */
-#include <Python.h>
 #include "numpy/arrayobject.h"
+#include <Python.h>
 #include <stdio.h>
 
-#define color(row, col) ((((row) & 1) << 1) + ((col) & 1))
-#define dngcolor(row, col) (0x94949494 >> ((((row) << 1 & 14) + ((col) & 1)) << 1) & 3)
+#define color(row, col) ((((row)&1) << 1) + ((col)&1))
+#define dngcolor(row, col) (0x94949494 >> ((((row) << 1 & 14) + ((col)&1)) << 1) & 3)
 
-static PyObject *get_sony_frame_data(PyObject *self, PyObject *args)
+static PyObject* get_sony_frame_data(PyObject* self, PyObject* args)
 {
     int width, height, offset;
     int factor, rowstart, colstart;
-    char *filename;
-    PyObject *data;
-    FILE *src;
+    char* filename;
+    PyObject* data;
+    FILE* src;
     int r_off, c_off;
     int is_dng;
-    unsigned short *line;
+    unsigned short* line;
 
     src = NULL;
     line = NULL;
 
     if (!PyArg_ParseTuple(args, "Osiiiiiiiii", &data, &filename,
-                          &width, &height, &offset, &factor,
-                          &r_off, &c_off, &rowstart, &colstart, &is_dng)) {
+            &width, &height, &offset, &factor,
+            &r_off, &c_off, &rowstart, &colstart, &is_dng)) {
         goto err;
     }
 
@@ -53,12 +53,12 @@ static PyObject *get_sony_frame_data(PyObject *self, PyObject *args)
         goto err;
     }
 
-    line = (unsigned short *)malloc(width * sizeof(unsigned short));
+    line = (unsigned short*)malloc(width * sizeof(unsigned short));
     if (!line) {
         PyErr_NoMemory();
         goto err;
     }
-    
+
     for (int row = 0; row < height; ++row) {
         if (fread(line, 2, width, src) != width) {
             PyErr_SetString(PyExc_IOError, "fread faliure");
@@ -70,8 +70,7 @@ static PyObject *get_sony_frame_data(PyObject *self, PyObject *args)
                 int cc = (col + c_off) * factor + colstart;
                 if (cc >= 0 && cc < width * factor) {
                     int c = is_dng ? dngcolor(row, col) : color(row, col);
-                    unsigned short *out =
-                        (unsigned short *)PyArray_GETPTR3(data, rr, cc, c);
+                    unsigned short* out = (unsigned short*)PyArray_GETPTR3(data, rr, cc, c);
                     *out = line[col];
                 }
             }
@@ -80,11 +79,11 @@ static PyObject *get_sony_frame_data(PyObject *self, PyObject *args)
 
     free(line);
     fclose(src);
-    
+
     Py_INCREF(Py_None);
     return Py_None;
 
-  err:
+err:
     if (line) {
         free(line);
     }
@@ -94,8 +93,7 @@ static PyObject *get_sony_frame_data(PyObject *self, PyObject *args)
     return NULL;
 }
 
-
-static PyObject *get_fuji_frame_data(PyObject *self, PyObject *args)
+static PyObject* get_fuji_frame_data(PyObject* self, PyObject* args)
 {
     int factor, rowstart, colstart;
     PyObject *data, *im;
@@ -104,8 +102,8 @@ static PyObject *get_fuji_frame_data(PyObject *self, PyObject *args)
     int is_dng;
 
     if (!PyArg_ParseTuple(args, "OiiiOiiiii", &im, &height, &width, &factor,
-                          &data, &r_off, &c_off, &rowstart, &colstart,
-                          &is_dng)) {
+            &data, &r_off, &c_off, &rowstart, &colstart,
+            &is_dng)) {
         goto err;
     }
 
@@ -115,11 +113,9 @@ static PyObject *get_fuji_frame_data(PyObject *self, PyObject *args)
             for (int x = 0; x < width; ++x) {
                 int cc = (x + c_off) * factor + colstart;
                 if (cc >= 0 && cc < width * factor) {
-                    unsigned short *v =
-                        (unsigned short *)PyArray_GETPTR2(im, y, x);
+                    unsigned short* v = (unsigned short*)PyArray_GETPTR2(im, y, x);
                     int c = is_dng ? dngcolor(y, x) : color(y, x);
-                    unsigned short *out =
-                        (unsigned short *)PyArray_GETPTR3(data, rr, cc, c);
+                    unsigned short* out = (unsigned short*)PyArray_GETPTR3(data, rr, cc, c);
                     *out = *v;
                 }
             }
@@ -129,17 +125,16 @@ static PyObject *get_fuji_frame_data(PyObject *self, PyObject *args)
     Py_INCREF(Py_None);
     return Py_None;
 
-  err:
+err:
     return NULL;
 }
 
-
 static PyMethodDef _makearq_methods[] = {
-    {"get_sony_frame_data", (PyCFunction) get_sony_frame_data, METH_VARARGS,
-     "Get the data stored in one ARW frame"},
-    {"get_fuji_frame_data", (PyCFunction) get_fuji_frame_data, METH_VARARGS,
-     "Get the data stored in one RAF frame"},
-    {NULL, NULL, 0, NULL}
+    { "get_sony_frame_data", (PyCFunction)get_sony_frame_data, METH_VARARGS,
+        "Get the data stored in one ARW frame" },
+    { "get_fuji_frame_data", (PyCFunction)get_fuji_frame_data, METH_VARARGS,
+        "Get the data stored in one RAF frame" },
+    { NULL, NULL, 0, NULL }
 };
 
 #if PY_MAJOR_VERSION == 2
