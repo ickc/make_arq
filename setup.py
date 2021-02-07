@@ -27,10 +27,12 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
     ],
     install_requires=[
-        "numpy",
+        "numpy >=1.10,<2",
         "tifffile",
-        "rawpy",
     ],
+    extras_require={
+        "extras": ["rawpy"]
+    },
     packages=["make_arq"],
     package_dir={"make_arq": "src/make_arq"},
     ext_modules=[
