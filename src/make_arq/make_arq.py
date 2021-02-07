@@ -16,17 +16,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from __future__ import print_function, division
-import os, sys
+from __future__ import division, print_function
+
 import argparse
-import tifffile
-import numpy
-import struct
-import time
-import tempfile
 import json
-import subprocess
+import os
 import stat
+import struct
+import subprocess
+import sys
+import tempfile
+import time
+
+import numpy
+import tifffile
 
 try:
     import _makearq

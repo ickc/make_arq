@@ -1,5 +1,5 @@
-from setuptools import setup, Extension
 import numpy
+from setuptools import Extension, setup
 
 setup(
     name="make_arq",
