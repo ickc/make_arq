@@ -1,3 +1,18 @@
+![GitHub Actions](https://github.com/ickc/make_arq/workflows/Python%20package/badge.svg)
+[![Supported versions](https://img.shields.io/pypi/pyversions/make_arq.svg)](https://pypi.org/project/make_arq)
+[![Supported implementations](https://img.shields.io/pypi/implementation/make_arq.svg)](https://pypi.org/project/make_arq)
+[![PyPI Wheel](https://img.shields.io/pypi/wheel/make_arq.svg)](https://pypi.org/project/make_arq)
+[![PyPI Package latest release](https://img.shields.io/pypi/v/make_arq.svg)](https://pypi.org/project/make_arq)
+[![GitHub Releases](https://img.shields.io/github/tag/ickc/make_arq.svg?label=github+release)](https://github.com/ickc/make_arq/releases)
+[![Development Status](https://img.shields.io/pypi/status/make_arq.svg)](https://pypi.python.org/pypi/make_arq/)
+[![Downloads](https://img.shields.io/pypi/dm/make_arq.svg)](https://pypi.python.org/pypi/make_arq/)
+![License](https://img.shields.io/pypi/l/make_arq.svg)
+
+[![Conda Recipe](https://img.shields.io/badge/recipe-make_arq-green.svg)](https://anaconda.org/conda-forge/make_arq)
+[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/make_arq.svg)](https://anaconda.org/conda-forge/make_arq)
+[![Conda Version](https://img.shields.io/conda/vn/conda-forge/make_arq.svg)](https://anaconda.org/conda-forge/make_arq)
+[![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/make_arq.svg)](https://anaconda.org/conda-forge/make_arq)
+
 # A tool for generating Sony A7RIII/IV and Fujifilm GFX 100 Pixel-Shift files #
 
 This is a work by Alberto Griggio in <https://github.com/agriggio/make_arq>. The fork here is only packaging it properly and distribute it through PyPI and conda-forge.
