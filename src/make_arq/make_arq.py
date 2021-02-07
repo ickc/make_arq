@@ -430,11 +430,3 @@ def main():
     write_raw(opts.output, data, frames[0][1], is16, is_sony)
     end = time.time()
     print("Total time: %.3f" % (end - start))
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print("ERROR: %s" % str(e))
-        exit(-1)
