@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 #
 #    make_arq - A tool for generating Sony Pixel-Shift ARQ files
 #    Copyright (C) 2018-2020 Alberto Griggio <alberto.griggio@gmail.com>
