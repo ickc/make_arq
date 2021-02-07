@@ -21,10 +21,8 @@ from __future__ import division, print_function
 import argparse
 import json
 import os
-import stat
 import struct
 import subprocess
-import sys
 import tempfile
 import time
 
@@ -338,8 +336,8 @@ def write_raw(filename, data, outtags, is16, is_sony):
                 crop_size = [c * 2 for c in crop_size]
             h, w, _ = data.shape
             data = data[
-                crop_origin[1] : crop_origin[1] + crop_size[1],
-                crop_origin[0] : crop_origin[0] + crop_size[0],
+                crop_origin[1]: crop_origin[1] + crop_size[1],
+                crop_origin[0]: crop_origin[0] + crop_size[0],
             ]
     else:
         extratags.append((258, "H", 1, [14 if is_sony else 16]))  # BitsPerSample
